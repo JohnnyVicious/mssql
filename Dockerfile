@@ -26,5 +26,13 @@ RUN mkdir -p /etc/ld.so.conf.d && touch /etc/ld.so.conf.d/mssql.conf
 RUN echo -e "# mssql libs\n/opt/mssql/lib" >> /etc/ld.so.conf.d/mssql.conf
 RUN ldconfig
 
+EXPOSE 1433
+ENV ACCEPT_EULA=Y
+ENV SA_PASSWORD=P@ssw0rd
+
+# Folders to optionally map:
+# /var/opt/mssql/backup
+# /var/opt/mssql/data
+
 USER mssql
 CMD ["/opt/mssql/bin/sqlservr"]
